@@ -234,15 +234,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Contact Form Submission
-        function submitForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+         
+        ///
+        document.addEventListener('DOMContentLoaded', () => {
+            // All your existing JavaScript code
+            
+            // Contact Form Submission
+            const contactForm = document.getElementById('contactForm');
+            const submitBtn = document.getElementById('submitbtn');
+            const formMessage = document.getElementById('form-message');
 
-            if (name && email && message) {
-                alert('Message sent successfully!');
-                document.getElementById('contact-form').reset();
-            } else {
-                alert('Please fill in all fields.');
-            }
-        }
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Sending...';
+                formMessage.textContent = '';
+                formMessage.className = 'form-message';
+                
+                // Simulate form submission (replace with actual AJAX call if needed)
+                setTimeout(() => {
+                    // Show success message
+                    formMessage.textContent = 'Message sent successfully!';
+                    formMessage.className = 'form-message success';
+                    
+                    // Reset form after a delay
+                    setTimeout(() => {
+                        contactForm.reset();
+                        submitBtn.innerHTML = 'Send Message <i class="fas fa-paper-plane" style="color: black;"></i>';
+                        submitBtn.disabled = false;
+                        
+                        // Clear success message after a while
+                        setTimeout(() => {
+                            formMessage.textContent = '';
+                            formMessage.className = 'form-message';
+                        }, 3000);
+                    }, 1500);
+                }, 2000);
+            });
+            
+            // The rest of your JavaScript code
+        });
